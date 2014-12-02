@@ -2,27 +2,48 @@
 \usepackage[margin=30mm]{geometry}
 \title{\textbf{Fundamentals of Cryptographic Ciphers}}
 \author{Chris Euerle, Eric Harrison, Claire Pitman, Kenneth Wayman}
-\date{}
+\date{December 3rd, 2014}
 \begin{document}
 
 \maketitle
 
 \section{Introduction}
 
-\hspace{4mm} In our modern, computer-filled world, the security of information is paramount. Every web developer has been told to 'salt-and-hash' user passwords at least once in their life, and we all know the storied lives of Alice and Bob and their attempts to communicate securely.  Far too often, however, developers implementing large-scale systems either do not understand the origins of cryptography, leading to easily avoidable security vulnerabilities \cite{Software-Security}.
+\hspace{4mm} 
+In our modern, computer-filled world, the security of information is paramount. 
+Every web developer has been told to 'salt-and-hash' user passwords at least once in their life, and we all know the storied lives of Alice and Bob and their attempts to communicate securely. 
+Far too often, however, developers implementing large-scale systems either do not understand the origins of cryptography, leading to easily avoidable security vulnerabilities \cite{Software-Security}.
 
 \vspace{3mm}
 
 The relevance is especially apparent in light of recent attacks like that perpetrated against Sony this past November.  
 
-\section{Related Work}
-\hspace{4mm} 	In recent years, there has not been much serious research work into ciphers where the two communicating parties need to meet, as public-key cryptography has largely taken over.  The reason for public-key's dominance is self-evident: plaintext communication over the internet is inherently insecure, so it would be impossible for the two partes to establish a secure secret key.  Because of its limitations, cryptography that depends entirely on a secret key is more-or-less obsolete.  
+\section{Related Work}%-------------------------------------------------------
+\hspace{4mm} 	
+In recent years, there has not been much serious research work into ciphers where the two communicating parties need to meet as public-key cryptography has largely taken over.  
+The reason for public-key's dominance is self-evident: plaintext communication over the internet is inherently insecure. 
+Therefore, in order to use a secret key-only cipher, the two parties must have a way to securely communicate a secret key.  
+But, if they have a way to securely transmit a secret key, why would they not just use that channel to communicate? \cite{Coursera}   
+This limitation on key exchange is essentially insurmountable, and thus secret key cryptography is now more-or-less obsolete.  
 
 \vspace{3mm}
 
-	Because of the lack of modern research into purely secret key-based ciphers, it is perhaps more instructive to consider the contents of a basic cryptography course, as these now encompass the majority of past research into such methods.  
-\section{Procedure?}
-\hspace{4mm}	Our first step was to recreate the basic ciphers of pre-modern cryptography \cite{Alice-and-Bob}.  We first implemented a shift cipher, and from there implemented both an affine shift cipher and a Vign\`ere cipher.  
+Since purely secret key-based ciphers are no longer the subject of significant research, it is perhaps more instructive to consider the contents of a basic cryptography course as \emph{related work}, as these now encompass the majority of existing research into such methods.
+In a course by William Gasarch at the University of Maryland, College Park, for example, "pre-modern" methods, including shift ciphers, affine ciphers, and Vign\`ere ciphers are covered in detail \cite{Alice-and-Bob}.
+A similar, though admittedly more perfunctory treatment of these ciphers is also given by Dan Boneh in the cryptography course he teaches for Stanford University online.
+
+\vspace{3mm}
+
+While there is nothing wrong with these treatments of pre-modern cryptographic methods, it has been our experience that it is far moer effective to learn, especially in Computer Science, by actually designing and implementing something in code.
+
+
+	
+
+\section{Procedure?}%---------------------------------------------------------
+\hspace{4mm}	
+Our first step was to recreate the basic ciphers of pre-modern cryptography \cite{Alice-and-Bob}.  
+Our implementations were coded in Python, as the Python language has a very low barrier to entry and it is interpreted for rapid prototyping.  
+We first implemented a shift cipher, and from there implemented both an affine shift cipher and a Vign\`ere cipher.  
 \section{Evaluation}
 
 \section{Conclusion}
