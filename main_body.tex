@@ -1,49 +1,67 @@
 \documentclass[11pt]{article}
+\newcommand\newl{\vspace{3mm}}
+\newcommand\tab{\hspace{4mm}}
+\newcommand\formulabreak{\\\\}
 \usepackage[margin=30mm]{geometry}
+\usepackage{amsmath}
 \title{\textbf{Fundamentals of Cryptographic Ciphers}}
 \author{Chris Euerle, Eric Harrison, Claire Pitman, Kenneth Wayman}
 \date{December 3rd, 2014}
 \begin{document}
-
 \maketitle
-
 \section{Introduction}
 
-\hspace{4mm} 
-In our modern, computer-filled world, the security of information is paramount. 
+\tab
+In the modern world, the security of information is paramount. 
 Every web developer has been told to 'salt-and-hash' user passwords at least once in their life, and we all know the storied lives of Alice and Bob and their attempts to communicate securely. 
 Far too often, however, developers implementing large-scale systems either do not understand the origins of cryptography, leading to easily avoidable security vulnerabilities \cite{Software-Security}.
 
-\vspace{3mm}
+\newl
 
 The relevance is especially apparent in light of recent attacks like that perpetrated against Sony this past November.  
 
 \section{Related Work}%-------------------------------------------------------
-\hspace{4mm} 	
+\tab	
 In recent years, there has not been much serious research work into ciphers where the two communicating parties need to meet as public-key cryptography has largely taken over.  
 The reason for public-key's dominance is self-evident: plaintext communication over the internet is inherently insecure. 
 Therefore, in order to use a secret key-only cipher, the two parties must have a way to securely communicate a secret key.  
 But, if they have a way to securely transmit a secret key, why would they not just use that channel to communicate? \cite{Coursera}   
 This limitation on key exchange is essentially insurmountable, and thus secret key cryptography is now more-or-less obsolete.  
 
-\vspace{3mm}
+\newl
 
-Since purely secret key-based ciphers are no longer the subject of significant research, it is perhaps more instructive to consider the contents of a basic cryptography course as \emph{related work}, as these now encompass the majority of existing research into such methods.
+Since purely secret-key-based ciphers are no longer the subject of significant research, it is perhaps more instructive to consider the contents of a basic cryptography course as \emph{related work}, as these now encompass the majority of existing research into such methods.
 In a course by William Gasarch at the University of Maryland, College Park, for example, "pre-modern" methods, including shift ciphers, affine ciphers, and Vign\`ere ciphers are covered in detail \cite{Alice-and-Bob}.
 A similar, though admittedly more perfunctory treatment of these ciphers is also given by Dan Boneh in the cryptography course he teaches for Stanford University online.
+While there is nothing wrong with these treatments per se, it has been our experience that it is far more effective to learn, especially in Computer Science, by actually designing and implementing something in code.
+\newpage
+\section{Procedure}%----------------------------------------------------  -----
+\tab	
+To that end, we decided to implement some basic substitution ciphers in python. The three ciphers that we chose were the basic shift cipher, the affine cipher, and the Vign\`ere cipher.  These form a natural progression, from simplest to most complex, that builds off of the very simple concept of substitution.  We selected them because they are both simple and instructive enough to give insight into the origins of cryptography.
+\subsection{Shift Cipher}
+\tab
+The shift cipher is one of the most well known types of cipher, likely due to the popularity of the \emph{Caesar cipher}.  It uses a single integer key between 0 and 25 both in encoding and decoding the message.  The basic encode algorithm for a shift cipher with key \emph{K} is as follows:
 
-\vspace{3mm}
+\begin{enumerate}
+\item
+For every character in the message text \emph{M}, assign the character a cardinal number corresponding to its position in the alphabet, e.g.
+\begin{displaymath}
+\{A \mapsto 0,\ B \mapsto 1, . . ., Z \mapsto 25\}
+\end{displaymath}
+Call that number \emph{X}.
+\item
+Use \emph{X} to calculate the cipher number \emph{N}:
+\begin{displaymath}
+N=( X + K ) mod 26
+\end{displaymath}
+\item
+Map \emph{N} back to the character domain to obtain the ciphertext
+\end{enumerate}
+\tab
+In order to communicate using a shift cipher, the two parties simply have to communicate their integer key, and the message can be decoded by reversing the method above.  Unfortunately, a shift cipher is extremely insecure, as the brute force method to crack a shift cipher is neither computationally expensive nor theoretically challenging: just try every possible shift. 
+\subsection{Affine Cipher}
 
-While there is nothing wrong with these treatments of pre-modern cryptographic methods, it has been our experience that it is far moer effective to learn, especially in Computer Science, by actually designing and implementing something in code.
-
-
-	
-
-\section{Procedure?}%---------------------------------------------------------
-\hspace{4mm}	
-Our first step was to recreate the basic ciphers of pre-modern cryptography \cite{Alice-and-Bob}.  
-Our implementations were coded in Python, as the Python language has a very low barrier to entry and it is interpreted for rapid prototyping.  
-We first implemented a shift cipher, and from there implemented both an affine shift cipher and a Vign\`ere cipher.  
+\subsection{Vign\`ere Cipher}
 \section{Evaluation}
 
 \section{Conclusion}
